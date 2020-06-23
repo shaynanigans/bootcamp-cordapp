@@ -20,3 +20,26 @@
 
 #### Corda States
 - Privacy is the most important part of a business blockchain.
+- In corda we share data on a need to know basis
+- Each node only sees subset of facts they need to see on the ledger
+- In corda these shared facts are called states
+- Parties on the network are represented by the Party class
+- Shared facts are represented by the ContractState class
+
+##### States API
+###### Party Class
+```kotlin
+class Party(val name: CordaX500Name, owningKey: PublicKey) : AbstractParty(owningKey)
+``` 
+- `CordaX500Name`: Legal identity of the party
+- `PublicKey`: Used to check signatures
+
+
+###### ContractState Interface
+```kotlin
+interface ContractState{
+    val participants: List<AbstractParty>
+}
+```
+- Any state classes must implement this interface
+- `participants`: List of parties on the network that should be notified when the state is changed
